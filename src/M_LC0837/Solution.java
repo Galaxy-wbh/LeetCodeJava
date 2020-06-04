@@ -1,4 +1,4 @@
-package M_LC9837;
+package M_LC0837;
 
 public class Solution {
     public double new21Game(int N, int K, int W) {
