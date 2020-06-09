@@ -6,9 +6,11 @@ public class Solution {
         UnionFind unionFind = new UnionFind(26);
         for(String equation:equations){
             char[] charArray = equation.toCharArray();
-            int index1 = charArray[0] - 'a';
-            int index2 = charArray[3] - 'a';
-            unionFind.union(index1, index2);
+            if(charArray[1] == '=') {
+                int index1 = charArray[0] - 'a';
+                int index2 = charArray[3] - 'a';
+                unionFind.union(index1, index2);
+            }
         }
 
         for(String equation:equations){
@@ -54,7 +56,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        String[] s = {"a==b","e==c","b==c","a!=e"};
+        String[] s = {"c==c","b==d","x!=z"};
         boolean flag = new Solution().equationsPossible(s);
         System.out.println(flag);
     }
