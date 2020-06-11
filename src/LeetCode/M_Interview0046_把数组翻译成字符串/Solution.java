@@ -1,5 +1,7 @@
 package LeetCode.M_Interview0046_把数组翻译成字符串;
 
+import java.util.concurrent.Callable;
+
 public class Solution {
     public int translateNum(int num) {
         String numString = num+"";
@@ -21,4 +23,5 @@ public class Solution {
     public static void main(String[] args) {
         System.out.println(new Solution().translateNum(26));
     }
+
 }
