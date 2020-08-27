@@ -4,16 +4,16 @@ import java.util.Random;
 
 public class AllSort {
 
-    public static void quickSort(int [] data, int start, int end){
+    public static void quickSort(int[] data, int start, int end){
         if(data == null || data.length == 0)
             return;
         if(start == end)
             return;
         int index = partition(data, start, end);
         if(index > start)
-            partition(data, start, index-1);
+            quickSort(data, start, index-1);
         if(index < end)
-            partition(data, index+1, end);
+            quickSort(data, index+1, end);
     }
 
     public static int partition(int[] data, int start, int end){
@@ -21,8 +21,8 @@ public class AllSort {
         int index = start + random.nextInt(end-start+1);
         swap(data, index, end);
         int res = start-1;
-        for(int i=start; i<end;i++){
-            if(data[i] < data[end]){
+        for(int i=start;i<end;i++){
+            if(data[i] > data[end]){
                 res++;
                 if(i != res){
                     swap(data, i, res);
@@ -40,11 +40,14 @@ public class AllSort {
         data[b] = temp;
     }
 
+
+
     public static void mergeSort(int[] data, int start, int end){
         if(data == null || data.length == 0)
             return;
+        int[] copy = new int[data.length];
         if(start < end){
-            int[] copy = new int[data.length];
+
             int mid = start + (end-start)/2;
             mergeSort(data, start, mid);
             mergeSort(data, mid+1, end);
@@ -102,10 +105,51 @@ public class AllSort {
         }
     }
 
+    public static void selectSort(int[] data){
+        int min;
+        for(int i=0;i<data.length;i++){
+            min = i;
+            for(int j=i+1;j<data.length;j++){
+                if(data[j]<data[min]){
+                    min = j;
+                }
+            }
+            if(min != i){
+                swap(data, i, min);
+            }
+        }
+    }
+
+    public static void bubbleSort(int[] data){
+        int n = data.length;
+        for(int i=0;i<n-1;i++){
+            for(int j=1;j<n-i;j++){
+                if(data[j] < data[j-1]){
+                    swap(data, j, j-1);
+                }
+            }
+        }
+    }
+
+    public static void insertSort(int[] data){
+        int n = data.length;
+        if(n == 1)
+            return;
+        for(int i=1;i<n;i++){
+            int current = data[i];
+            int j = i-1;
+            while(j>=0 && data[j]>current){
+                data[j+1] = data[j];
+                j--;
+            }
+            data[j+1] = current;
+        }
+    }
     public static void main(String[] args) {
-        int[] test = new int[]{4,2,6,7,3,6,1};
-        heapSort(test);
+        int[] test = new int[]{5,2,4,1,3,6,0};
+        mergeSort(test,0, test.length-1);
         for(int i:test)
             System.out.print(i+" ");
+
     }
 }
